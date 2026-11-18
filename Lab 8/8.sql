@@ -365,3 +365,4 @@ SELECT emp_id, salary FROM big_employees WHERE salary BETWEEN 50000 AND 50100;
 
 
 
+EXPLAIN ANALYZE SELECT * FROM big_employees WHERE salary > 99900;

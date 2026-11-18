@@ -60,14 +60,13 @@ Seq Scan. The table has only 5 rows so it's cheaper to just read it all. So post
 
 1. emp_hire_month_idx on year and month of hire_date.
 2. emp_dept_email_unique_idx on (dept_id, email).
-3. Made big_employees table with 200 000 rows. Query WHERE salary > 99900 used Bitmap Index Scan, execution time 2.442 ms.
+3. Made big_employees table with 200 000 rows. Query WHERE salary > 99900 used Bitmap Index Scan, execution time 0.964 ms.
 4. Covering index big_emp_salary_cover_idx on salary INCLUDE (emp_id). For SELECT emp_id, salary it can do Index Only Scan and doesn't go to the table.
 
-## Screenshots
+## Screenshot
 
-![EXPLAIN without index](screenshots/explain_seq_scan.png)
-![EXPLAIN with index](screenshots/explain_index_scan.png)
+![EXPLAIN with index](screenshots.jpeg)
 
 ## Reflection
 
-Indexes make select faster but insert/update slower and take space, so you don't need them on every column. I was a bit surprised that on employees table postgres didn't use the index at all, just Seq Scan, because table is too small. On 200k rows it used the index and query took around 2.4 ms. So I think indexes are needed on big tables and on columns that are used a lot in WHERE, JOIN, ORDER BY. B-tree is enough in most cases. And better check with EXPLAIN if index really works.
+Indexes make select faster but insert/update slower and take space, so you don't need them on every column. I was a bit surprised that on employees table postgres didn't use the index at all, just Seq Scan, because table is too small. On 200k rows it used the index and query took less than 1 ms. So I think indexes are needed on big tables and on columns that are used a lot in WHERE, JOIN, ORDER BY. B-tree is enough in most cases. And better check with EXPLAIN if index really works.
