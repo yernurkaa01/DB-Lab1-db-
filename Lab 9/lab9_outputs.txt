@@ -1,0 +1,374 @@
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+NOTICE:  function total_fees(pg_catalog.int4) does not exist, skipping
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP FUNCTION
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 5
+INSERT 0 8
+INSERT 0 6
+INSERT 0 22
+ stations | bikes | members | rentals
+----------+-------+---------+---------
+        5 |     8 |       6 |      22
+(1 row)
+
+CREATE FUNCTION
+CREATE FUNCTION
+ inc
+-----
+  11
+(1 row)
+
+CREATE FUNCTION
+ rental_days
+-------------
+           5
+(1 row)
+
+ rental_days
+-------------
+           8
+(1 row)
+
+ rental_days
+-------------
+
+(1 row)
+
+ rental_days
+-------------
+
+(1 row)
+
+CREATE FUNCTION
+ member_rental_count
+---------------------
+                   5
+(1 row)
+
+ member_rental_count
+---------------------
+                   4
+(1 row)
+
+ member_rental_count
+---------------------
+                   0
+(1 row)
+
+ member_rental_count
+---------------------
+                   0
+(1 row)
+
+CREATE FUNCTION
+ station_city
+--------------
+ Astana
+(1 row)
+
+ station_city
+--------------
+
+(1 row)
+
+ rental_id | member_id | duration
+-----------+-----------+----------
+        11 |         3 |        8
+         4 |         1 |        7
+        15 |         5 |        7
+        17 |         5 |        7
+         7 |         2 |        6
+        14 |         4 |        6
+        20 |         4 |        6
+         2 |         1 |        5
+(8 rows)
+
+CREATE FUNCTION
+ fee_with_discount
+-------------------
+             62.90
+(1 row)
+
+CREATE FUNCTION
+     member_stats
+-----------------------
+ (5,164.75,2025-06-01)
+(1 row)
+
+ rental_cnt | total_fee | last_start
+------------+-----------+------------
+          5 |    164.75 | 2025-06-01
+(1 row)
+
+ rental_cnt | total_fee | last_start
+------------+-----------+------------
+          0 |         0 |
+(1 row)
+
+CREATE FUNCTION
+ rental_id |  fee  | fee_with_late_charge
+-----------+-------+----------------------
+         1 | 13.50 |                18.50
+(1 row)
+
+CREATE FUNCTION
+ total | average | largest
+-------+---------+---------
+ 98.50 |   24.63 |   35.00
+(1 row)
+
+ err_sqlstate |              err_message              | err_detail |                                             err_hint
+--------------+---------------------------------------+------------+---------------------------------------------------------------------------------------------------
+ 42883        | function fee_summary() does not exist |            | No function matches the given name and argument types. You might need to add explicit type casts.
+(1 row)
+
+CREATE FUNCTION
+ total_fees
+------------
+      98.50
+(1 row)
+
+ total_fees
+------------
+          0
+(1 row)
+
+CREATE FUNCTION
+ total_fees
+------------
+      98.50
+(1 row)
+
+ total_fees
+------------
+      50.00
+(1 row)
+
+        signature         |               arguments               | returns
+--------------------------+---------------------------------------+---------
+ total_fees(integer)      | p_member_id integer                   | numeric
+ total_fees(integer,date) | p_member_id integer, p_from_date date | numeric
+(2 rows)
+
+CREATE FUNCTION
+ err_sqlstate |                err_message                 | err_detail |                                        err_hint
+--------------+--------------------------------------------+------------+----------------------------------------------------------------------------------------
+ 42725        | function total_fees(integer) is not unique |            | Could not choose a best candidate function. You might need to add explicit type casts.
+(1 row)
+
+DROP FUNCTION
+ total_fees
+------------
+      50.00
+(1 row)
+
+CREATE FUNCTION
+ total_fees
+------------
+      98.50
+(1 row)
+
+ total_fees
+------------
+      50.00
+(1 row)
+
+CREATE FUNCTION
+ found_id | found_model | found_rate
+----------+-------------+------------
+      105 | Road Sprint |       9.25
+      108 | Road Sprint |       9.25
+(2 rows)
+
+ found_id | found_model  | found_rate
+----------+--------------+------------
+      106 | Folding Mini |       3.75
+(1 row)
+
+        find_bikes
+--------------------------
+ (105,"Road Sprint",9.25)
+ (108,"Road Sprint",9.25)
+(2 rows)
+
+CREATE FUNCTION
+ h_rental_id |   h_model   | h_station | h_days | h_fee
+-------------+-------------+-----------+--------+-------
+           8 | Mountain X  | Expo Gate |      4 | 28.00
+           9 | Road Sprint | Expo Gate |      3 | 27.75
+          10 | Mountain X  | Expo Gate |      1 |  7.00
+          21 | Mountain X  | Riverside |      4 | 28.00
+          11 | Road Sprint | Expo Gate |      8 | 74.00
+(5 rows)
+
+CREATE FUNCTION
+ err_sqlstate |               err_message               |                           err_detail                            | err_hint
+--------------+-----------------------------------------+-----------------------------------------------------------------+----------
+ 42702        | column reference "bike_id" is ambiguous | It could refer to either a PL/pgSQL variable or a table column. |
+(1 row)
+
+DROP FUNCTION
+CREATE FUNCTION
+ out_bike_id |  out_model
+-------------+--------------
+         101 | City Cruiser
+         102 | City Cruiser
+         108 | Road Sprint
+(3 rows)
+
+DROP FUNCTION
+CREATE FUNCTION
+ bike_id |    model
+---------+--------------
+     101 | City Cruiser
+     102 | City Cruiser
+     108 | Road Sprint
+(3 rows)
+
+CREATE FUNCTION
+ err_sqlstate |                      err_message                       |                               err_detail                               | err_hint
+--------------+--------------------------------------------------------+------------------------------------------------------------------------+----------
+ 42804        | structure of query does not match function result type | Returned type bigint does not match expected type integer in column 2. |
+(1 row)
+
+CREATE FUNCTION
+    s_name    | s_bikes | s_free
+--------------+---------+--------
+ Central Park |       3 |      1
+ Riverside    |       2 |      1
+(2 rows)
+
+  s_name   | s_bikes | s_free
+-----------+---------+--------
+ Expo Gate |       2 |      3
+ Depot     |       0 |      0
+(2 rows)
+
+NOTICE:  The rentals table holds 22 rows.
+DO
+ err_sqlstate |                            err_message                             | err_detail | err_hint
+--------------+--------------------------------------------------------------------+------------+----------
+ 42601        | end label "wrong_label" differs from block's label "rental_report" |            |
+(1 row)
+
+NOTICE:  The rentals table holds 22 rows.
+NOTICE:  1) Outer fee_total before the subblock: 621.50
+NOTICE:  2) Subblock fee_total (from 2025-01-01): 369.00
+NOTICE:  3) Outer fee_total via label from inside: 621.50
+NOTICE:  4) Outer fee_total after the subblock: 621.50
+DO
+NOTICE:  first_sub: recent_cnt = 13
+ err_sqlstate |            err_message             | err_detail | err_hint
+--------------+------------------------------------+------------+----------
+ 42703        | column "recent_cnt" does not exist |            |
+(1 row)
+
+NOTICE:  first_sub: recent_cnt = 13
+NOTICE:  second_sub: recent_cnt = 13
+DO
+CREATE FUNCTION
+ before_total | after_total
+--------------+-------------
+       252.50 |      369.00
+(1 row)
+
+ before_total | after_total | split_sum | table_total
+--------------+-------------+-----------+-------------
+       252.50 |      369.00 |    621.50 |      621.50
+(1 row)
+
+CREATE FUNCTION
+ station_id | station_name | bikes_parked | capacity_pct
+------------+--------------+--------------+--------------
+         10 | Central Park |            3 |         75.0
+         20 | Riverside    |            2 |         66.7
+         30 | Expo Gate    |            2 |         40.0
+         40 | Old Town     |            1 |         50.0
+         50 | Depot        |            0 |
+(5 rows)
+
+CREATE FUNCTION
+     t_name     | t_rentals | t_spent
+----------------+-----------+---------
+ Marta Kowalski |         5 |  164.75
+ Chen Wei       |         4 |  139.25
+ Daniyar Serik  |         4 |  138.00
+(3 rows)
+
+     t_name      | t_rentals | t_spent
+-----------------+-----------+---------
+ Marta Kowalski  |         5 |  164.75
+ Chen Wei        |         4 |  139.25
+ Daniyar Serik   |         4 |  138.00
+ Aisha Nurlanova |         5 |   98.50
+ Omar Haddad     |         4 |   81.00
+ Elena Petrova   |         0 |       0
+(6 rows)
+
+CREATE FUNCTION
+    i_member    |   i_model   | i_days | i_amount | i_status
+----------------+-------------+--------+----------+----------
+ Marta Kowalski | Road Sprint |      8 |    74.00 | CLOSED
+(1 row)
+
+    i_member     |   i_model    | i_days | i_amount | i_status
+-----------------+--------------+--------+----------+----------
+ Aisha Nurlanova | City Cruiser |    411 |  1849.50 | OPEN
+(1 row)
+
+ i_amount | stored_fee | equal
+----------+------------+-------
+    74.00 |      74.00 | t
+(1 row)
+
+CREATE FUNCTION
+CREATE FUNCTION
+ c_members | c_rentals | c_revenue
+-----------+-----------+-----------
+         3 |         9 |    236.50
+(1 row)
+
+ c_members | c_rentals | c_revenue
+-----------+-----------+-----------
+         3 |         5 |    135.50
+(1 row)
+
+ c_members | c_rentals | c_revenue
+-----------+-----------+-----------
+         2 |         9 |    304.00
+(1 row)
+
+ c_members | c_rentals | c_revenue
+-----------+-----------+-----------
+         2 |         5 |    178.75
+(1 row)
+
+    variant    | members | rentals | revenue
+---------------+---------+---------+---------
+ date in ON    |       3 |       5 |  135.50
+ date in WHERE |       2 |       5 |  135.50
+(2 rows)
